@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { CiMenuFries } from "react-icons/ci";
+import { useState } from "react";
 
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 
@@ -23,7 +24,6 @@ const links = [
     name: "work",
     path: "/work",
   },
-
   {
     name: "contact",
     path: "/contact",
@@ -32,17 +32,26 @@ const links = [
 
 const MobileNav = () => {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Function to close the navbar when a link is clicked
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
 
   return (
-    <Sheet>
-      <SheetTrigger className="flex justify-center items-center">
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+      <SheetTrigger
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex justify-center items-center"
+      >
         <CiMenuFries className="text-[32px] text-accent" />
       </SheetTrigger>
 
       <SheetContent className="flex flex-col">
         {/* logo */}
         <div className=" mt-32 mb-40 text-center text-2xl ">
-          <Link href="/">
+          <Link href="/" onClick={closeMenu}>
             Ashish<span className=" text-accent text-3xl">.</span>
           </Link>
         </div>
@@ -51,7 +60,9 @@ const MobileNav = () => {
           {links.map((link, index) => {
             return (
               <Link
+                key={index}
                 href={link.path}
+                onClick={closeMenu} // Close menu on link click
                 className={`${
                   link.path === pathname &&
                   "text-accent border-b-2 border-accent"
