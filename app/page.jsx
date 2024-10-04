@@ -14,8 +14,10 @@ const Home = () => {
           <div className=" text-center lg:text-left order-2 lg:order-none">
             <span>Front End Developer</span>
             <h1 className="h1 mb-6">
-              Namaste! <br /> <span className=" text-accent">I'm Ashish</span>
+              Namaste! <br />{" "}
+              <span className=" text-accent">I&#39;m Ashish</span>
             </h1>
+
             <p className=" max-w-[500px] mb-9 text-white/80">
               With the power bestowed upon me by tech, I love to turn designs
               into reality.
